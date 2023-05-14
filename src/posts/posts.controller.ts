@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { iPost } from './post.model';
 import { CreatePostDto } from './dto/create-post.dto';
+import { iPost } from './post.model';
+import { iDeletePostResponse } from 'src/types/PostResponse';
 
 @Controller('posts')
 export class PostsController {
@@ -20,5 +21,11 @@ export class PostsController {
   @Get('/:id')
   getPostById(@Param('id') id: string): iPost {
     return this.postsService.getPostById(id);
+  }
+
+  @Delete('/:id')
+  deletePostById(@Param('id') id: string): iDeletePostResponse {
+    const result = this.postsService.deletePostById(id);
+    return result;
   }
 }
