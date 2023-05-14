@@ -13,6 +13,7 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostStatus, iPost } from './post.model';
 import { iDeletePostResponse } from 'src/types/PostResponse';
+import { PostStatusValidationPipe } from './pipes/post-status-validation.pipe';
 
 @Controller('posts')
 export class PostsController {
@@ -42,7 +43,7 @@ export class PostsController {
   @Patch('/:id/status')
   updatePostStatus(
     @Param('id') id: string,
-    @Body('status') status: PostStatus,
+    @Body('status', PostStatusValidationPipe) status: PostStatus,
   ) {
     return this.postsService.updatePostStatus(id, status);
   }
