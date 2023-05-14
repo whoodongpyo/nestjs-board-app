@@ -1,7 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
-import { iPost } from './post.model';
+import { PostStatus, iPost } from './post.model';
 import { iDeletePostResponse } from 'src/types/PostResponse';
 
 @Controller('posts')
@@ -25,7 +33,14 @@ export class PostsController {
 
   @Delete('/:id')
   deletePostById(@Param('id') id: string): iDeletePostResponse {
-    const result = this.postsService.deletePostById(id);
-    return result;
+    return this.postsService.deletePostById(id);
+  }
+
+  @Patch('/:id/status')
+  updatePostStatus(
+    @Param('id') id: string,
+    @Body('status') status: PostStatus,
+  ) {
+    return this.postsService.updatePostStatus(id, status);
   }
 }

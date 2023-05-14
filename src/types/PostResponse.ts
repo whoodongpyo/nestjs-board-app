@@ -6,3 +6,10 @@ export interface iDeletePostResponse {
   postToBeDeleted?: iPost;
   deletedPost?: iPost;
 }
+
+export interface iPatchPostResponse {
+  success?: string;
+  error?: string;
+  postToBeUpdated?: iPost;
+  updatedPost?: iPost;
+}

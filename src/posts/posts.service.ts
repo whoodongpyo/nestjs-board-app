@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { iPost, PostStatus } from './post.model';
-import { iDeletePostResponse } from 'src/types/PostResponse';
+import {
+  iDeletePostResponse,
+  iPatchPostResponse,
+} from 'src/types/PostResponse';
 import { v1 as uuid } from 'uuid';
 
 @Injectable()
@@ -51,6 +54,23 @@ export class PostsService {
     return {
       success: '게시글이 정상적으로 삭제되었습니다.',
       deletedPost: postToBeDeleted,
+    };
+  }
+
+  updatePostStatus(id: string, status: PostStatus): iPatchPostResponse {
+    const post = this.getPostById(id);
+
+    if (!post) {
+      return {
+        error: '수정하려는 게시글이 존재하지 않습니다.',
+      };
+    }
+
+    post.status = status;
+
+    return {
+      success: '게시글이 성공적으로 수정되었습니다.',
+      updatedPost: post,
     };
   }
 }
