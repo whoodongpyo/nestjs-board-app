@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Post, PostStatus } from './post.model';
+import { iPost, PostStatus } from './post.model';
 import { v1 as uuid } from 'uuid';
 
 @Injectable()
 export class PostsService {
-  private posts: Post[] = [];
+  private posts: iPost[] = [];
 
-  getAllPosts(): Post[] {
+  getAllPosts(): iPost[] {
     return this.posts;
   }
 
   createPost(title: string, description: string) {
-    const post: Post = {
+    const post: iPost = {
       id: uuid(),
       title,
       description,
