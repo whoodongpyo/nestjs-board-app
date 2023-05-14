@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { Post } from './post.model';
 
 @Injectable()
 export class PostsService {
-  private posts = [];
+  private posts: Post[] = [];
 
-  getAllPosts() {
+  getAllPosts(): Post[] {
     return this.posts;
   }
 }
