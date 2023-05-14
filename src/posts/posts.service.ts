@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { iPost, PostStatus } from './post.model';
 import {
@@ -29,7 +29,13 @@ export class PostsService {
   }
 
   getPostById(id: string): iPost {
-    return this.posts.find((post) => post.id === id);
+    const post = this.posts.find((post) => post.id === id);
+
+    if (!post) {
+      throw new NotFoundException(`Can't find Post. (id: ${id})`);
+    }
+
+    return post;
   }
 
   deletePostById(id: string): iDeletePostResponse {
