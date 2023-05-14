@@ -41,23 +41,10 @@ export class PostsService {
   deletePostById(id: string): iDeletePostResponse {
     const postToBeDeleted = this.getPostById(id);
 
-    if (!postToBeDeleted) {
-      return {
-        error: '삭제하려는 게시글이 존재하지 않습니다.',
-      };
-    }
-
-    this.posts = this.posts.filter((post) => post.id !== id);
-
-    const post = this.getPostById(id);
-    if (post) {
-      return {
-        error: '삭제하려는 게시글이 정상적으로 삭제되지 않았습니다.',
-        postToBeDeleted,
-      };
-    }
+    this.posts = this.posts.filter((post) => post.id !== postToBeDeleted.id);
 
     return {
+      statusCode: 200,
       success: '게시글이 정상적으로 삭제되었습니다.',
       deletedPost: postToBeDeleted,
     };
