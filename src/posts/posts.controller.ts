@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { iPost } from './post.model';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -15,5 +15,10 @@ export class PostsController {
   @Post('/')
   createPost(@Body() createPostDto: CreatePostDto): iPost {
     return this.postsService.createPost(createPostDto);
+  }
+
+  @Get('/:id')
+  getPostById(@Param('id') id: string): iPost {
+    return this.postsService.getPostById(id);
   }
 }

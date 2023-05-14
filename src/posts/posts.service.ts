@@ -23,4 +23,8 @@ export class PostsService {
     this.posts.push(post);
     return post; // 생성한 게시글 정보를 확인용으로 전달하기
   }
+
+  getPostById(id: string): iPost {
+    return this.posts.find((post) => post.id === id);
+  }
 }
