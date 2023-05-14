@@ -10,6 +10,5 @@ export interface iDeletePostResponse {
 export interface iPatchPostResponse {
   success?: string;
   error?: string;
-  postToBeUpdated?: iPost;
   updatedPost?: iPost;
 }
