@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { iPost, PostStatus } from './post.model';
+import { CreatePostDto } from './dto/create-post.dto';
 import { v1 as uuid } from 'uuid';
 
 @Injectable()
@@ -10,7 +11,8 @@ export class PostsService {
     return this.posts;
   }
 
-  createPost(title: string, description: string) {
+  createPost(createPostDto: CreatePostDto) {
+    const { title, description } = createPostDto;
     const post: iPost = {
       id: uuid(),
       title,
