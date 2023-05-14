@@ -6,6 +6,8 @@ import {
   Param,
   Patch,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -22,6 +24,7 @@ export class PostsController {
   }
 
   @Post('/')
+  @UsePipes(ValidationPipe)
   createPost(@Body() createPostDto: CreatePostDto): iPost {
     return this.postsService.createPost(createPostDto);
   }
