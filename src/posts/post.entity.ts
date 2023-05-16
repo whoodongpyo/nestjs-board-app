@@ -1,7 +1,8 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { PostStatus } from './post.model';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { PostStatus } from './post-status-enum';
 
-export class Post extends BaseEntity {
+@Entity()
+export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 

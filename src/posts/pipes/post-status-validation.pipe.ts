@@ -1,5 +1,5 @@
-import { PipeTransform, BadRequestException } from '@nestjs/common';
-import { PostStatus } from '../post.model';
+import { BadRequestException, PipeTransform } from '@nestjs/common';
+import { PostStatus } from '../post-status-enum';
 
 export class PostStatusValidationPipe implements PipeTransform {
   readonly StatusOption = [PostStatus.PRIVATE, PostStatus.PUBLIC];

@@ -7,6 +7,6 @@ import { PostRepository } from './post.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([PostRepository])],
   controllers: [PostsController],
-  providers: [PostsService],
+  providers: [PostsService, PostRepository],
 })
 export class PostsModule {}

@@ -1,4 +1,4 @@
-import { iPost } from 'src/posts/post.model';
+import { iPost } from 'src/posts/post-status-enum';
 
 export interface iDeletePostResponse {
   statusCode?: number;
