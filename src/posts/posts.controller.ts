@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   UsePipes,
   ValidationPipe,
@@ -22,7 +24,12 @@ export class PostsController {
   }
 
   @Get('/:id')
-  getPostById(@Param('id') id: number): Promise<PostEntity> {
+  getPostById(@Param('id', ParseIntPipe) id: number): Promise<PostEntity> {
     return this.postsService.getPostById(id);
+  }
+
+  @Delete('/:id')
+  deletePostById(@Param('id', ParseIntPipe) id): Promise<void | object> {
+    return this.postsService.deletePostById(id);
   }
 }

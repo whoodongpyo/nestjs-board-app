@@ -14,4 +14,8 @@ export class PostsService {
   async getPostById(id: number): Promise<Post> {
     return this.postRepository.getPostById(id);
   }
+
+  async deletePostById(id: number): Promise<void | object> {
+    return await this.postRepository.deletePostById(id);
+  }
 }

@@ -37,4 +37,16 @@ export class PostRepository extends Repository<Post> {
 
     return found;
   }
+
+  async deletePostById(id: number): Promise<void | object> {
+    const deleteResult = await this.delete({ id: id });
+
+    if (deleteResult.affected === 0) {
+      throw new NotFoundException(`Can't find Post with id ${id}.`);
+    }
+
+    return {
+      message: `id가 ${id}인 게시글이 성공적으로 삭제되었습니다.`,
+    };
+  }
 }
