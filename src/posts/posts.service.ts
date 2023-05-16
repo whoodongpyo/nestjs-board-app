@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PostRepository } from './post.repository';
 import { Post } from './post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
+import { PostStatus } from './post-status-enum';
 
 @Injectable()
 export class PostsService {
@@ -13,6 +14,10 @@ export class PostsService {
 
   async getPostById(id: number): Promise<Post> {
     return this.postRepository.getPostById(id);
+  }
+
+  async updatePostStatus(id: number, status: PostStatus): Promise<Post> {
+    return this.postRepository.updatePostStatus(id, status);
   }
 
   async deletePostById(id: number): Promise<void | object> {

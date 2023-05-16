@@ -38,6 +38,15 @@ export class PostRepository extends Repository<Post> {
     return found;
   }
 
+  async updatePostStatus(id: number, status: PostStatus): Promise<Post> {
+    const post = await this.getPostById(id);
+
+    post.status = status;
+    await this.save(post);
+
+    return post;
+  }
+
   async deletePostById(id: number): Promise<void | object> {
     const deleteResult = await this.delete({ id: id });
 
