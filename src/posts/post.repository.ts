@@ -24,6 +24,11 @@ export class PostRepository extends Repository<Post> {
     return post;
   }
 
+  async getAllPosts(): Promise<Post[]> {
+    const posts = await this.find();
+    return posts;
+  }
+
   async getPostById(id: number): Promise<Post> {
     const found = await this.findOne({
       where: {

@@ -26,6 +26,11 @@ export class PostsController {
     return this.postsService.createPost(createPostDto);
   }
 
+  @Get()
+  getAllPosts(): Promise<PostEntity[]> {
+    return this.postsService.getAllPosts();
+  }
+
   @Get('/:id')
   getPostById(@Param('id', ParseIntPipe) id): Promise<PostEntity> {
     return this.postsService.getPostById(id);
