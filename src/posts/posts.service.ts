@@ -1,22 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PostRepository } from './post.repository';
 import { Post } from './post.entity';
+import { CreatePostDto } from './dto/create-post.dto';
 
 @Injectable()
 export class PostsService {
   constructor(private postRepository: PostRepository) {}
 
+  async createPost(createPostDto: CreatePostDto): Promise<Post> {
+    return this.postRepository.createPost(createPostDto);
+  }
+
   async getPostById(id: number): Promise<Post> {
-    const found = await this.postRepository.findOne({
-      where: {
-        id: id,
-      },
-    });
-
-    if (!found) {
-      throw new NotFoundException(`Can't find Post. (id: ${id})`);
-    }
-
-    return found;
+    return this.postRepository.getPostById(id);
   }
 }

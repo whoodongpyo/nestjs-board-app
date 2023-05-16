@@ -1,10 +1,40 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { Post } from './post.entity';
+import { CreatePostDto } from './dto/create-post.dto';
+import { PostStatus } from './post-status-enum';
 
 @Injectable()
 export class PostRepository extends Repository<Post> {
   constructor(private dataSource: DataSource) {
     super(Post, dataSource.createEntityManager());
+  }
+
+  async createPost(createPostDto: CreatePostDto): Promise<Post> {
+    const { title, description } = createPostDto;
+
+    const post = this.create({
+      title,
+      description,
+      status: PostStatus.PUBLIC,
+    });
+
+    await this.save(post);
+
+    return post;
+  }
+
+  async getPostById(id: number): Promise<Post> {
+    const found = await this.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!found) {
+      throw new NotFoundException(`Can't find Post. (id: ${id})`);
+    }
+
+    return found;
   }
 }
