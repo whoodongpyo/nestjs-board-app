@@ -8,23 +8,23 @@ import { PostStatus } from './post-status-enum';
 export class PostsService {
   constructor(private postRepository: PostRepository) {}
 
-  async createPost(createPostDto: CreatePostDto): Promise<Post> {
+  createPost(createPostDto: CreatePostDto): Promise<Post> {
     return this.postRepository.createPost(createPostDto);
   }
 
-  async getAllPosts(): Promise<Post[]> {
+  getAllPosts(): Promise<Post[]> {
     return this.postRepository.getAllPosts();
   }
 
-  async getPostById(id: number): Promise<Post> {
+  getPostById(id: number): Promise<Post> {
     return this.postRepository.getPostById(id);
   }
 
-  async updatePostStatus(id: number, status: PostStatus): Promise<Post> {
+  updatePostStatus(id: number, status: PostStatus): Promise<Post> {
     return this.postRepository.updatePostStatus(id, status);
   }
 
-  async deletePostById(id: number): Promise<void | object> {
-    return await this.postRepository.deletePostById(id);
+  deletePostById(id: number): Promise<void | object> {
+    return this.postRepository.deletePostById(id);
   }
 }
